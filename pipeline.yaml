@@ -1,0 +1,13 @@
+steps:
+  - command: "npm install && node test.js"
+    label: "API tests"
+
+  - wait
+
+  - command: "rm -rf tmp/mongodata/*"
+    label: "Drop MongoDB"
+
+  - wait
+
+  - command: "docker exec wf-mongo mongorestore --gzip --archive=/tmp/mongobackups/wf-mongo-dump-2022-03-30T21\\:24\\:05.103Z"
+    label: "Rebuild"
